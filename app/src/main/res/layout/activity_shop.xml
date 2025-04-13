@@ -8,10 +8,9 @@
         android:id="@+id/shopTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Üdvözlünk a köröm webshopban!"
+        android:text="Üdvözlünk a NailShop-ban!"
         android:textSize="24sp"
-        android:textStyle="bold"
-        android:gravity="center" />
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/logoutButton"
