@@ -1,6 +1,8 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_gravity="center"
     android:padding="16dp">
 
     <LinearLayout
@@ -29,31 +31,35 @@
         <!-- Bejelentkezés gomb -->
         <Button
             android:id="@+id/loginButton"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:text="Bejelentkezés" />
 
         <!-- Google bejelentkezési gomb -->
         <com.google.android.gms.common.SignInButton
             android:id="@+id/googleSignInButton"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginTop="16dp" />
 
         <!-- Vendégként belépés gomb -->
         <Button
             android:id="@+id/guestLoginButton"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:text="Vendégként belépés"
             android:layout_marginTop="16dp" />
 
         <Button
             android:id="@+id/backButton"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Vissza"
-            android:layout_marginTop="16dp" />
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:text="Vissza" />
 
     </LinearLayout>
 </ScrollView>
