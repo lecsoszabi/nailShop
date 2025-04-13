@@ -28,5 +28,4 @@
         <activity android:name=".ShopActivity"
             android:exported="true" />
     </application>
-
 </manifest>

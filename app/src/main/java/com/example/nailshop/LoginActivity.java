@@ -49,13 +49,16 @@ public class LoginActivity extends AppCompatActivity {
                                 startActivity(new Intent(LoginActivity.this, ShopActivity.class));
                                 finish();
                             } else {
-                                Toast.makeText(LoginActivity.this, "Bejelentkezés sikertelen.", Toast.LENGTH_SHORT).show();
+                                String errorMessage = task.getException() != null ? task.getException().getMessage() : "Ismeretlen hiba";
+                                Toast.makeText(LoginActivity.this, "Bejelentkezés sikertelen: " + errorMessage, Toast.LENGTH_LONG).show();
                             }
                         });
             } else {
                 Toast.makeText(LoginActivity.this, "Tölts ki minden mezőt!", Toast.LENGTH_SHORT).show();
             }
         });
+
+
 
         // Google Sign-In konfiguráció
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
