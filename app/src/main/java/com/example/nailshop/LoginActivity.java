@@ -70,6 +70,15 @@ public class LoginActivity extends AppCompatActivity {
 
         // Vendégként belépés gomb kezelése
         findViewById(R.id.guestLoginButton).setOnClickListener(v -> signInAnonymously());
+
+        // Visszagomb kezelése
+        Button backButton = findViewById(R.id.backButton);
+        backButton.setOnClickListener(v -> {
+            // Vissza a főoldalra (MainActivity)
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish(); // Bezárja a LoginActivity-t
+        });
     }
 
     private void signInWithGoogle() {

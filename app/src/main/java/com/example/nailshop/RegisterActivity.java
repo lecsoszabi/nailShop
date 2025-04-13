@@ -1,6 +1,7 @@
 package com.example.nailshop;
 
 import androidx.appcompat.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
@@ -15,6 +16,7 @@ public class RegisterActivity extends AppCompatActivity {
         binding = ActivityRegisterBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        // Regisztráció gomb kezelése
         binding.registerButton.setOnClickListener(v -> {
             String email = binding.emailEditText.getText().toString();
             String password = binding.passwordEditText.getText().toString();
@@ -31,6 +33,14 @@ public class RegisterActivity extends AppCompatActivity {
             } else {
                 Toast.makeText(RegisterActivity.this, "Tölts ki minden mezőt!", Toast.LENGTH_SHORT).show();
             }
+        });
+
+        // Visszagomb kezelése
+        binding.backButton.setOnClickListener(v -> {
+            // Vissza a főoldalra (MainActivity)
+            Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish(); // Bezárja a Regisztrációs képernyőt
         });
     }
 }
