@@ -3,6 +3,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_gravity="center"
+    android:background="@drawable/gradient_backround"
     android:padding="16dp">
 
     <LinearLayout
@@ -31,6 +32,8 @@
         <!-- Bejelentkezés gomb -->
         <Button
             android:id="@+id/loginButton"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/button_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -39,6 +42,7 @@
         <!-- Google bejelentkezési gomb -->
         <com.google.android.gms.common.SignInButton
             android:id="@+id/googleSignInButton"
+            android:background="@drawable/gradient_backround"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -48,6 +52,7 @@
         <Button
             android:id="@+id/guestLoginButton"
             android:layout_width="wrap_content"
+            android:background="@drawable/button_style"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="Vendégként belépés"
@@ -57,6 +62,7 @@
             android:id="@+id/backButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button_style"
             android:layout_gravity="center"
             android:layout_marginTop="16dp"
             android:text="Vissza" />

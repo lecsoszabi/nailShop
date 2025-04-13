@@ -7,6 +7,8 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.example.nailshop.databinding.ActivityRegisterBinding;
 
+import java.util.Objects;
+
 public class RegisterActivity extends AppCompatActivity {
     private ActivityRegisterBinding binding;
 
@@ -27,7 +29,7 @@ public class RegisterActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 Toast.makeText(RegisterActivity.this, "Sikeres regisztráció!", Toast.LENGTH_SHORT).show();
                             } else {
-                                Toast.makeText(RegisterActivity.this, "Hiba: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(RegisterActivity.this, "Hiba: " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         });
             } else {
