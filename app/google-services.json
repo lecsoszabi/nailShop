@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "251193400788",
+    "project_id": "nailshop-97e2b",
+    "storage_bucket": "nailshop-97e2b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:251193400788:android:9520f508f8f927dc34ca41",
+        "android_client_info": {
+          "package_name": "com.example.nailshop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "251193400788-domi20jjh9jiskdkvn3o7fdtne2cibrn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.nailshop",
+            "certificate_hash": "b7d34e5671bb9de8f1643945c25e7015b8dcceee"
+          }
+        },
+        {
+          "client_id": "251193400788-hufd6170akp4bj196gm18kla50n538pf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBpyER_SA7KMNlx4B4v39bmtUOzjKLuav8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "251193400788-hufd6170akp4bj196gm18kla50n538pf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
