@@ -60,13 +60,16 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             holder.btnEdit.setVisibility(View.VISIBLE);
             holder.btnDelete.setVisibility(View.VISIBLE);
 
-            // Szerkesztés gomb
+            // ProductAdapter.java
             holder.btnEdit.setOnClickListener(v -> {
                 Intent intent = new Intent(context, AddOrEditProductActivity.class);
                 intent.putExtra("productId", product.getId());
                 intent.putExtra("editMode", true);
-                context.startActivity(intent);
+                intent.putExtra("productUploaderId", product.getUserId());
+                intent.putExtra("uploaderEmail", product.getUploaderEmail());
+                ((ShopActivity) context).addProductLauncher.launch(intent);
             });
+
 
             // Törlés gomb
             holder.btnDelete.setOnClickListener(v -> {

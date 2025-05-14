@@ -8,15 +8,19 @@ public class Product {
     private String imageUrl;
     private String userId;
 
+    private String uploaderEmail;
+
+
     public Product() {}
 
-    public Product(String id, String name, String description, double price, String imageUrl, String userId) {
+    public Product(String id, String name, String description, double price, String imageUrl, String userId,String uploaderEmail) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
         this.imageUrl = imageUrl;
         this.userId = userId;
+        this.uploaderEmail = uploaderEmail;
 
     }
 
@@ -38,8 +42,15 @@ public class Product {
     public String getUserId() {
         return userId;
     }
-
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public String getUploaderEmail() {
+        return uploaderEmail;
+    }
+
+    public void setUploaderEmail(String uploaderEmail) {
+        this.uploaderEmail = uploaderEmail;
     }
 }

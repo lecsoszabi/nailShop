@@ -29,7 +29,7 @@ public class ShopActivity extends AppCompatActivity {
     private FirebaseFirestore db;
 
     // Modern Activity Result API
-    private ActivityResultLauncher<Intent> addProductLauncher;
+    ActivityResultLauncher<Intent> addProductLauncher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

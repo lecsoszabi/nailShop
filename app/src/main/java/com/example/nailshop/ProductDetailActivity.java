@@ -21,7 +21,6 @@ public class ProductDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_detail);
 
-
         MaterialToolbar toolbar = findViewById(R.id.topAppBar);
         toolbar.setNavigationOnClickListener(v -> finish());
 
@@ -42,7 +41,6 @@ public class ProductDetailActivity extends AppCompatActivity {
                     .get()
                     .addOnSuccessListener(documentSnapshot -> {
                         if (documentSnapshot.exists()) {
-                            // Már van ilyen termék, mennyiséget növelünk
                             CartItem existingItem = documentSnapshot.toObject(CartItem.class);
                             int newQuantity = existingItem.getQuantity() + 1;
                             db.collection("carts")
@@ -60,7 +58,6 @@ public class ProductDetailActivity extends AppCompatActivity {
                                         }, 1000);
                                     });
                         } else {
-                            // Nincs még ilyen termék, újként adjuk hozzá
                             db.collection("carts")
                                     .document(userId)
                                     .collection("items")
@@ -97,5 +94,14 @@ public class ProductDetailActivity extends AppCompatActivity {
         Glide.with(this)
                 .load(imageUrl)
                 .into(ivProductImage);
+
+        // Feltöltő e-mail kiírása
+        TextView tvUploader = findViewById(R.id.tvProductUploader);
+        String uploaderEmail = getIntent().getStringExtra("uploaderEmail");
+        if (uploaderEmail != null && !uploaderEmail.isEmpty()) {
+            tvUploader.setText("Feltöltő: " + uploaderEmail);
+        } else {
+            tvUploader.setText("Feltöltő: ismeretlen");
+        }
     }
 }
