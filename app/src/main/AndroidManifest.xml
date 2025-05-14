@@ -27,5 +27,12 @@
             android:exported="true" />
         <activity android:name=".ShopActivity"
             android:exported="true" />
+        <activity android:name=".ProductDetailActivity"
+            android:exported="true" />
+        <activity android:name=".CartActivity"
+            android:exported="true"/>
+        <activity android:name=".ProfileActivity"
+            android:exported="true"/>
+
     </application>
 </manifest>

@@ -1,0 +1,31 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#EEEEEE"
+    android:layout_margin="8dp">
+
+    <TextView
+        android:id="@+id/tvOrderDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dátum: "
+        android:textStyle="bold"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/tvOrderItems"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Termékek"
+        android:layout_marginTop="4dp"/>
+
+    <TextView
+        android:id="@+id/tvOrderTotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Összesen:"
+        android:textStyle="bold"
+        android:layout_marginTop="4dp"/>
+</LinearLayout>
