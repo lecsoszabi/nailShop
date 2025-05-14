@@ -12,6 +12,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.appbar.MaterialToolbar;
 
+import com.bumptech.glide.Glide;
+import android.widget.ImageView;
+
 public class ProductDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,5 +90,12 @@ public class ProductDetailActivity extends AppCompatActivity {
         tvName.setText(name);
         tvDescription.setText(description);
         tvPrice.setText(price + " Ft");
+
+        ImageView ivProductImage = findViewById(R.id.ivProductImage);
+        String imageUrl = getIntent().getStringExtra("productImageUrl");
+
+        Glide.with(this)
+                .load(imageUrl)
+                .into(ivProductImage);
     }
 }

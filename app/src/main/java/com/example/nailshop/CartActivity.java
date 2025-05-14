@@ -26,14 +26,27 @@ public class CartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
 
-        // Toolbar vissza gomb
         MaterialToolbar toolbar = findViewById(R.id.cartToolbar);
         toolbar.setNavigationOnClickListener(v -> finish());
 
-        // Rendelés gomb
+        recyclerView = findViewById(R.id.recyclerCart);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        cartAdapter = new CartAdapter(cartItemList);
+        recyclerView.setAdapter(cartAdapter);
+
+        db = FirebaseFirestore.getInstance();
+        userId = FirebaseAuth.getInstance().getCurrentUser() != null
+                ? FirebaseAuth.getInstance().getCurrentUser().getUid()
+                : null;
+
+        if (userId == null) {
+            Toast.makeText(this, "Nem vagy bejelentkezve!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+
         Button btnOrder = findViewById(R.id.btnOrder);
         btnOrder.setOnClickListener(v -> {
-            // 1. Kosár lekérése
             db.collection("carts")
                     .document(userId)
                     .collection("items")
@@ -50,17 +63,15 @@ public class CartActivity extends AppCompatActivity {
                             return;
                         }
 
-                        // 2. Rendelés létrehozása
+
                         Order order = new Order(userId, System.currentTimeMillis(), items);
 
-                        // 3. Új rendelés dokumentum létrehozása az orders/{userId}/orders/ kollekcióban
                         db.collection("orders")
                                 .document(userId)
                                 .collection("orders")
                                 .add(order)
                                 .addOnSuccessListener(orderRef -> {
                                     // 4. Kosár törlése
-                                    // Minden kosár elem törlése
                                     for (CartItem item : items) {
                                         db.collection("carts")
                                                 .document(userId)
@@ -80,16 +91,6 @@ public class CartActivity extends AppCompatActivity {
                         Toast.makeText(this, "Hiba a kosár lekérdezésekor!", Toast.LENGTH_SHORT).show();
                     });
         });
-
-
-        recyclerView = findViewById(R.id.recyclerCart);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        cartAdapter = new CartAdapter(cartItemList);
-        recyclerView.setAdapter(cartAdapter);
-
-        db = FirebaseFirestore.getInstance();
-        userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
         loadCartItems();
     }
 
@@ -106,6 +107,9 @@ public class CartActivity extends AppCompatActivity {
                             cartItemList.add(item);
                         }
                         cartAdapter.notifyDataSetChanged();
+                        if (cartItemList.isEmpty()) {
+                            Toast.makeText(this, "A kosár üres.", Toast.LENGTH_SHORT).show();
+                        }
                     } else {
                         Toast.makeText(CartActivity.this, "Hiba a kosár betöltésekor!", Toast.LENGTH_SHORT).show();
                     }

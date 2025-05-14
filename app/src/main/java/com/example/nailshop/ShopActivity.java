@@ -1,5 +1,8 @@
 package com.example.nailshop;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,11 +19,6 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-
-// Például egy gomb vagy bármilyen view animálásához:
-
 
 public class ShopActivity extends AppCompatActivity {
 
@@ -30,6 +28,9 @@ public class ShopActivity extends AppCompatActivity {
     private List<Product> productList = new ArrayList<>();
     private FirebaseFirestore db;
 
+    // Modern Activity Result API
+    private ActivityResultLauncher<Intent> addProductLauncher;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,19 +38,23 @@ public class ShopActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
-        loadProductsFromFirestore();
-        // Teszt termék gomb (bal felső sarok)
-        Button btnAddTestProduct = findViewById(R.id.btnAddTestProduct);
-        btnAddTestProduct.setOnClickListener(v -> {
-            Product product = new Product("99", "Teszt termék", "Ez csak teszt", 1234.0, "");
-            db.collection("products").add(product)
-                    .addOnSuccessListener(documentReference -> {
-                        Toast.makeText(ShopActivity.this, "Teszt termék hozzáadva!", Toast.LENGTH_SHORT).show();
-                        loadProductsFromFirestore(); // FRISSÍTÉS!
-                    })
-                    .addOnFailureListener(e -> {
-                        Toast.makeText(ShopActivity.this, "Hiba a termék hozzáadásakor!", Toast.LENGTH_SHORT).show();
-                    });
+
+        // --- Modern Activity Result API beállítása ---
+        addProductLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == RESULT_OK) {
+                        loadProductsFromFirestore();
+                    }
+                }
+        );
+
+        // Gomb: Új termék hozzáadása
+        Button btnAddProduct = findViewById(R.id.btnAddTestProduct);
+        btnAddProduct.setText("Új termék hozzáadása");
+        btnAddProduct.setOnClickListener(v -> {
+            Intent intent = new Intent(ShopActivity.this, AddOrEditProductActivity.class);
+            addProductLauncher.launch(intent); // Modern módon indítjuk!
         });
 
         recyclerProducts = findViewById(R.id.recyclerProducts);
@@ -57,9 +62,7 @@ public class ShopActivity extends AppCompatActivity {
         adapter = new ProductAdapter(this, productList);
         recyclerProducts.setAdapter(adapter);
 
-
-
-        // Kijelentkezés gomb (jobb felső sarok)
+        // Kijelentkezés gomb
         Button logoutButton = findViewById(R.id.logoutButton);
         logoutButton.setOnClickListener(v -> {
             mAuth.signOut();
@@ -77,8 +80,8 @@ public class ShopActivity extends AppCompatActivity {
             startActivity(new Intent(ShopActivity.this, ProfileActivity.class));
         });
 
-
-
+        // Első betöltéskor is töltsük be a termékeket
+        loadProductsFromFirestore();
     }
 
     private void loadProductsFromFirestore() {

@@ -7,6 +7,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -28,6 +30,9 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
 
         tvProfileName = findViewById(R.id.tvProfileName);
+
+        MaterialToolbar toolbar = findViewById(R.id.profileToolbar);
+        toolbar.setNavigationOnClickListener(v -> finish());
 
         // Felhasználó nevének vagy emailjének kiírása
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
